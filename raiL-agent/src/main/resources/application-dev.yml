@@ -6,3 +6,9 @@ spring:
     host: 192.168.43.143
     username: root
     password: root
+doubao:
+  llm:
+    api-key: 290b7c50-1ecb-41c5-8d55-28a679a7d49b
+    base-url: https://ark.cn-beijing.volces.com/api/v3/chat/completions
+    model: doubao-seed-2-0-pro-260215
+    timeout: 30000

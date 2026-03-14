@@ -1,5 +1,6 @@
 package org.rail.agent.controller;
 
+import jakarta.annotation.Resource;
 import org.rail.agent.dto.AgentRequestDTO;
 import org.rail.agent.dto.AgentResponseDTO;
 import org.rail.agent.service.impl.AgentTicketServiceImpl;
@@ -8,14 +9,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 
 /**
  * 独立智能体对外API
  */
 @RestController
 @RequestMapping("/ticket")
-public class AgentTicketController {
+public class  AgentTicketController {
     @Resource
     private AgentTicketServiceImpl agentTicketService;
 
