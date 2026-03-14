@@ -2,6 +2,7 @@ package org.rail.agent.pojo.dto;
 
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -10,11 +11,16 @@ import java.util.List;
  */
 @Data
 public class AgentTicketQueryDTO {
-    private Long userId;            // 用户ID
-    private String startStation;    // 出发站名称
+    // ============= 待实现 ================
+        /*private String trainNo;      // 车次号
+        private String startTime;    // 出发时间
+        private String endTime;      // 到达时间
+        private String price;        // 票价*/
+
+    // TODO 解析出startStation,endStation后，调用station得到对应编码
+    private String startStation;     // 出发站名称
     private String endStation;      // 到达站名称
-    private LocalDateTime travelTime; // 出行时间
-    private String seatType = "二等座"; // 坐席类型（默认二等座）
-    // 扩展字段（与原有系统对齐）
-    private List<Integer> trainTypeIds; // 列车类型ID
+    private List<Integer> trainTypeIds;     // 列车类型ID（可选）
+    private List<Integer> seatTypes;    // 席别类型（可选）
+    private LocalDate travelDate; // 出行日
 }
