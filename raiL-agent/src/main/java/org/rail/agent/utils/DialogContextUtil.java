@@ -1,12 +1,12 @@
-package org.rail.agent.util;
+package org.rail.agent.utils;
 
-import cn.hutool.core.json.JSONUtil;
+import cn.hutool.json.JSONUtil;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.rail.agent.dto.AgentTicketQueryDTO;
+import org.rail.agent.pojo.dto.AgentTicketQueryDTO;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 /**

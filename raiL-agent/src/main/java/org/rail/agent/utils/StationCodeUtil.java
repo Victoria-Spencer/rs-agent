@@ -1,4 +1,4 @@
-package org.rail.agent.util;
+package org.rail.agent.utils;
 
 import cn.hutool.core.collection.CollectionUtil;
 import lombok.extern.slf4j.Slf4j;
