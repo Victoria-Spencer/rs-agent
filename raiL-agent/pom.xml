@@ -22,7 +22,6 @@
         <spring-ai-alibaba-extensions.version>1.1.2.2</spring-ai-alibaba-extensions.version>
 
         <graalvm.polyglot.version>24.2.1</graalvm.polyglot.version>
-        <pagehelper-spring-boot-starter.version>1.4.7</pagehelper-spring-boot-starter.version>
     </properties>
 
     <dependencyManagement>
@@ -94,9 +93,8 @@
             <artifactId>jakarta.validation-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper-spring-boot-starter</artifactId>
-            <version>${pagehelper-spring-boot-starter.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
     </dependencies>
 

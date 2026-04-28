@@ -3,38 +3,6 @@ server:
 
 spring:
   application:
-    name: rail-agent-service
+    name: rail-agent
   profiles:
     active: dev
-  cloud:
-    nacos:
-      discovery:
-        server-addr: ${spring.nacos.host}:${spring.nacos.port}
-        namespace: 1
-        group: DEFAULT_GROUP
-        graceful-shutdown: false
-  datasource:
-    url: jdbc:mysql://${spring.db.host}/rs-order
-    username: ${spring.db.username}
-    password: ${spring.db.password}
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  data:
-    redis:
-      host: 192.168.43.143
-      port: 6379
-      database: 1
-      timeout: PT5S
-      client-name: redis-single-client
-      lettuce:
-        pool:
-          max-active: 16
-          max-idle: 8
-          min-idle: 4
-          max-wait: PT2S
-
-doubao:
-  llm:
-    api-key: ${doubao.llm.api-key}
-    base-url: ${doubao.llm.base-url}
-    model: ${doubao.llm.model}
-    timeout: ${doubao.llm.timeout}

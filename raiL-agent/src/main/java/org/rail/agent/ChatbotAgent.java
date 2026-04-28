@@ -20,8 +20,12 @@ import com.alibaba.cloud.ai.graph.agent.extension.tools.filesystem.ReadFileTool;
 import com.alibaba.cloud.ai.graph.agent.hook.shelltool.ShellToolAgentHook;
 import com.alibaba.cloud.ai.graph.agent.tools.ShellTool;
 import com.alibaba.cloud.ai.graph.checkpoint.savers.MemorySaver;
-import org.rail.agent.model.StationQueryReq;
-import org.rail.agent.model.TicketQueryReq;
+import jakarta.annotation.Resource;
+import org.rail.agent.model.ai.AiStationQueryReq;
+import org.rail.agent.model.ai.AiTicketQueryReq;
+import org.rail.agent.tools.common.PythonTool;
+import org.rail.agent.tools.StationQueryFunction;
+import org.rail.agent.tools.TicketQueryFunction;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.tool.ToolCallback;
 import org.springframework.ai.tool.function.FunctionToolCallback;
@@ -40,7 +44,21 @@ public class ChatbotAgent {
 			2. 缺少出发地、目的地、日期时，主动追问用户
 			3. 回答简洁、清晰、友好
 			4. 可使用 Python 工具计算票价、数量
+			
+			
+			【关于 query_ticket 工具的参数 - 生死攸关】
+			- 除非用户明确说"高铁"、"动车"、"普速"，否则绝对不要设置 trainTypeIds
+			- 除非用户明确说"商务座"、"一等座"、"二等座"，否则绝对不要设置 seatTypes
+			- 乱传参数会导致查不到票，禁止自作主张添加参数！
 			""";
+
+	private final StationQueryFunction stationQueryFunction;
+	private final TicketQueryFunction ticketQueryFunction;
+	public ChatbotAgent(StationQueryFunction stationQueryFunction, TicketQueryFunction ticketQueryFunction) {
+		this.stationQueryFunction = stationQueryFunction;
+		this.ticketQueryFunction = ticketQueryFunction;
+	}
+
 
 	@Bean
 	public ReactAgent chatbotReactAgent(ChatModel chatModel,
@@ -113,18 +131,18 @@ public class ChatbotAgent {
 	// Tool: station_query
 	@Bean
 	public ToolCallback stationQueryTool() {
-		return FunctionToolCallback.builder("station_query", new StationQueryFunction())
+		return FunctionToolCallback.builder("station_query", stationQueryFunction)
 				.description("根据站点名称/拼音查询站点编码")
-				.inputType(StationQueryReq.class)
+				.inputType(AiStationQueryReq.class)
 				.build();
 	}
 
 	// Tool: query_ticket
 	@Bean
 	public ToolCallback queryTicketTool() {
-		return FunctionToolCallback.builder("query_ticket", new TicketQueryFunction())
+		return FunctionToolCallback.builder("query_ticket", ticketQueryFunction)
 				.description("根据出发站编码、到达站编码、出发日期查询高铁票信息")
-				.inputType(TicketQueryReq.class)
+				.inputType(AiTicketQueryReq.class)
 				.build();
 	}
 

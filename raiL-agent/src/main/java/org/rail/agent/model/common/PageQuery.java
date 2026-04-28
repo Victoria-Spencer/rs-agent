@@ -1,4 +1,4 @@
-package org.rail.agent.model;
+package org.rail.agent.model.common;
 
 import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PageQuery {
     @Min(1)
-    protected Integer pageNum = 1;
+    protected Integer pageNumber = 1;
     @Min(1)
     protected Integer pageSize = 10;
 }

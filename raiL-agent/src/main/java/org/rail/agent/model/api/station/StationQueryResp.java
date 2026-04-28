@@ -1,4 +1,4 @@
-package org.rail.agent.model;
+package org.rail.agent.model.api.station;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

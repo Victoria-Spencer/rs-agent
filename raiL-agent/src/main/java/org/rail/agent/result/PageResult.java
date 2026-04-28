@@ -1,6 +1,5 @@
-package org.rail.agent.model;
+package org.rail.agent.result;
 
-import com.github.pagehelper.Page;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -30,18 +29,7 @@ public class PageResult<T> implements Serializable {
     private Integer pages = 0;
 
     /**
-     * 构造方法：自动计算总页数（适配PageHelper的Page类型）
-     */
-    public PageResult(List<T> list) {
-        if(list instanceof Page<T> page) {
-            this.total = page.getTotal(); // 总条数
-            this.records = page; // 当前页数据
-            this.pages = page.getPages(); // 总页数
-        }
-    }
-
-    /**
-     * 构造方法2：适配内存分页/手动分页（核心：传入总条数+当前页数据，自动计算总页数）
+     * 适配内存分页/手动分页（核心：传入总条数+当前页数据，自动计算总页数）
      * @param total 总条数
      * @param records 当前页数据
      * @param pageSize 每页条数（用于计算总页数）
