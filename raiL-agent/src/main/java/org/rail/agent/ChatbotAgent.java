@@ -20,6 +20,7 @@ import com.alibaba.cloud.ai.graph.agent.extension.tools.filesystem.ReadFileTool;
 import com.alibaba.cloud.ai.graph.agent.hook.shelltool.ShellToolAgentHook;
 import com.alibaba.cloud.ai.graph.agent.tools.ShellTool;
 import com.alibaba.cloud.ai.graph.checkpoint.savers.MemorySaver;
+import org.rail.agent.model.StationQueryReq;
 import org.rail.agent.model.TicketQueryReq;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.tool.ToolCallback;
@@ -59,6 +60,7 @@ public class ChatbotAgent {
 						executeShellCommand,
 						executePythonCode,
 						viewTextFile,
+						stationQueryTool(),
 						queryTicketTool()
 				)
 				.build();
@@ -105,6 +107,15 @@ public class ChatbotAgent {
 						"You can specify offset and limit to read specific portions of the file. " +
 						"By default, reads up to 500 lines starting from the beginning of the file.")
 				.inputType(ReadFileTool.ReadFileRequest.class)
+				.build();
+	}
+
+	// Tool: station_query
+	@Bean
+	public ToolCallback stationQueryTool() {
+		return FunctionToolCallback.builder("station_query", new StationQueryFunction())
+				.description("根据站点名称/拼音查询站点编码")
+				.inputType(StationQueryReq.class)
 				.build();
 	}
 
